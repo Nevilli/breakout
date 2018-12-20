@@ -55,7 +55,12 @@ def main():
     mainSurface.blit(chad.image, chad.rect)
     pygame.display.update()
     brick_group = pygame.sprite.Group()
-
+    paddle_group = pygame.sprite.Group()
+    paddle_group.add(chad)
+    balls = ball.Ball(GOLD, APPLICATION_WIDTH, APPLICATION_HEIGHT, RADIUS_OF_BALL)
+    balls.rect.x = 205
+    balls.rect.y = 300
+    mainSurface.blit(balls.image, balls.rect)
 
     for m in range(BRICKS_PER_ROW):
         x = 0
@@ -76,10 +81,14 @@ def main():
                 pygame.quit()
                 sys.exit()
         mainSurface.fill(BLACK)
+        mainSurface.blit(balls.image, balls.rect)
         for bricks in brick_group:
             mainSurface.blit(bricks.image, bricks.rect)
         chad.move()
+        balls.move()
+        mainSurface.blit(balls.image, balls.rect)
         mainSurface.blit(chad.image, chad.rect)
         pygame.display.update()
+
 
 main()
