@@ -89,6 +89,13 @@ def main():
         mainSurface.blit(balls.image, balls.rect)
         mainSurface.blit(chad.image, chad.rect)
         pygame.display.update()
-
+        balls.collide(paddle_group, brick_group)
+        if balls.rect.bottom >= APPLICATION_HEIGHT:
+            balls.rect.x = 205
+            balls.rect.y = 300
+            NUM_TURNS -= 1
+            if NUM_TURNS == 0:
+                pygame.quit()
+                sys.exit()
 
 main()
