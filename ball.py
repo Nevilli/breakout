@@ -4,10 +4,9 @@ import pygame
 class Ball(pygame.sprite.Sprite):
 
     def __init__(self, color, windowWidth, windowHeight, radius):
-        # initialize sprite super class
         super().__init__()
 
-        # finish setting the class variables to the parameters
+        # class variables
         self.color = color
         self.radius = radius
         self.windowWidth = windowWidth
@@ -15,17 +14,20 @@ class Ball(pygame.sprite.Sprite):
         self.speedx = 5
         self.speedy = 5
 
-        # Create a surface, get the rect coordinates, fill the surface with a white color (or whatever color the
-        # background of your breakout game will be.
+        # size of the ball and puts it on screen
         self.image = pygame.Surface((radius * 2, radius * 2))
         self.image.fill ((0, 0, 0))
         self.rect = self.image.get_rect()
 
-        # Add a circle to represent the ball to the surface just created.
+        # makes the ball a circle
         pygame.draw.circle(self.image, self.color, (radius, radius), radius, 0)
         pygame.display.update()
 
     def move(self):
+        """
+        This function allows the ball to move and bounce off of the walls and bricks
+        :return: none
+        """
         self.rect.top += self.speedy
         self.rect.left += self.speedx
 
@@ -38,6 +40,12 @@ class Ball(pygame.sprite.Sprite):
             self.speedx = -self.speedx
 
     def collide(self, paddle_group, brick_group):
+        """
+        This function lets the ball collide with bricks on screen and remove them and with the paddle
+        :param paddle_group: ball bounces off of paddle
+        :param brick_group: balls hits bricks and removes them from screen
+        :return: none
+        """
         if pygame.sprite.spritecollide(self, brick_group, True):
             self.speedy = -self.speedy
         if pygame.sprite.spritecollide(self, paddle_group, False):

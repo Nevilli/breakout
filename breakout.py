@@ -3,7 +3,6 @@ from pygame.locals import *
 import brick
 import paddle
 import ball
-import random
 
 
 def main():
@@ -19,34 +18,31 @@ def main():
     BRICK_HEIGHT = 8
     PADDLE_WIDTH = 60
     PADDLE_HEIGHT = 10
-    RADIUS_OF_BALL = 10
+    RADIUS_OF_BALL = 75
     NUM_TURNS = 3
 
-    # Sets up the colors
+    # colors used
     RED = (255, 0, 0)
     ORANGE = (255, 165, 0)
     YELLOW = (255, 255, 0)
-    GREEN =(0, 255, 0)
+    GREEN = (0, 255, 0)
     CYAN = (0, 255, 255)
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
-    INDIGO = (63, 0, 255)
-    VIOLET = (238, 130, 238)
-    BLUE = (0, 0, 255)
     GOLD = (255, 209, 63)
 
     colors = [RED, RED, ORANGE, ORANGE, YELLOW, YELLOW, GREEN, GREEN, CYAN, CYAN]
     whites = [WHITE]
 
+    # Breakout window
     pygame.init()
     mainSurface = pygame.display.set_mode((APPLICATION_WIDTH, APPLICATION_HEIGHT), 0, 32)
     pygame.display.set_caption("Bricks")
-    # Step 1: Use loops to draw the rows of bricks. The top row of bricks should be 70 pixels away from the top of
-    # the screen (BRICK_Y_OFFSET)
 
     x = 0
     y = BRICK_Y_OFFSET
 
+    # This creates the paddle and places it on the screen
     q = APPLICATION_HEIGHT - PADDLE_Y_OFFSET
     r = (APPLICATION_WIDTH/2)
     chad = paddle.Paddle(mainSurface, whites[0], PADDLE_WIDTH, PADDLE_HEIGHT)
@@ -57,11 +53,13 @@ def main():
     brick_group = pygame.sprite.Group()
     paddle_group = pygame.sprite.Group()
     paddle_group.add(chad)
+    # This creates the ball
     balls = ball.Ball(GOLD, APPLICATION_WIDTH, APPLICATION_HEIGHT, RADIUS_OF_BALL)
     balls.rect.x = 205
     balls.rect.y = 300
     mainSurface.blit(balls.image, balls.rect)
 
+    # This loop creates the brick rows
     for m in range(BRICKS_PER_ROW):
         x = 0
         color = colors[m]
@@ -71,8 +69,10 @@ def main():
             bricks.rect.x = x
             bricks.rect.y = y
             mainSurface.blit(bricks.image, bricks.rect)
+            # This spaces out the bricks in each row
             x = x + BRICK_WIDTH + BRICK_SEP
             pygame.display.update()
+        # This spaces out the rows of bricks
         y = y + BRICK_HEIGHT + BRICK_SEP
 
     while True:
@@ -89,7 +89,9 @@ def main():
         mainSurface.blit(balls.image, balls.rect)
         mainSurface.blit(chad.image, chad.rect)
         pygame.display.update()
+        # This allows the ball to remove the bricks that it hits on screen
         balls.collide(paddle_group, brick_group)
+        # These if statements sets the number of turns for the game and will end it if the limit is reached
         if balls.rect.bottom >= APPLICATION_HEIGHT:
             balls.rect.x = 205
             balls.rect.y = 300
@@ -97,5 +99,6 @@ def main():
             if NUM_TURNS == 0:
                 pygame.quit()
                 sys.exit()
+
 
 main()
