@@ -91,7 +91,7 @@ def main():
         pygame.display.update()
         # This allows the ball to remove the bricks that it hits on screen
         balls.collide(paddle_group, brick_group)
-        # These if statements sets the number of turns for the game and will end it if the limit is reached
+        # These if statements set the number of turns for the game and will end it if the limit is reached
         if balls.rect.bottom >= APPLICATION_HEIGHT:
             balls.rect.x = 205
             balls.rect.y = 300
@@ -99,6 +99,9 @@ def main():
             if NUM_TURNS == 0:
                 pygame.quit()
                 sys.exit()
+        if len(brick_group) == 0:
+            pygame.quit()
+            sys.exit()
 
 
 main()

@@ -14,7 +14,7 @@ class Ball(pygame.sprite.Sprite):
         self.speedx = 5
         self.speedy = 5
 
-        # size of the ball and puts it on screen
+        # size and shape of the ball and puts it on screen
         self.image = pygame.Surface((radius * 2, radius * 2))
         self.image.fill ((0, 0, 0))
         self.rect = self.image.get_rect()
