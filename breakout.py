@@ -18,7 +18,7 @@ def main():
     BRICK_HEIGHT = 8
     PADDLE_WIDTH = 60
     PADDLE_HEIGHT = 10
-    RADIUS_OF_BALL = 75
+    RADIUS_OF_BALL = 10
     NUM_TURNS = 3
 
     # colors used
@@ -37,7 +37,15 @@ def main():
     # Breakout window
     pygame.init()
     mainSurface = pygame.display.set_mode((APPLICATION_WIDTH, APPLICATION_HEIGHT), 0, 32)
-    pygame.display.set_caption("Bricks")
+    pygame.display.set_caption("Trumpy")
+
+
+    background_image = pygame.image.load("Background.pn")
+    background_rect = background_image.get_rect()
+    background_rect.x = 0
+    background_rect.y = 0
+    mainSurface.blit(background_image, background_rect)
+
 
     x = 0
     y = BRICK_Y_OFFSET
