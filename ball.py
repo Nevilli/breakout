@@ -15,12 +15,13 @@ class Ball(pygame.sprite.Sprite):
         self.speedy = 5
 
         # size and shape of the ball and puts it on screen
-        self.image = pygame.Surface((radius * 2, radius * 2))
-        self.image.fill ((0, 0, 0))
+        # self.image = pygame.Surface((radius * 2, radius * 2))
+        # self.image.fill ((0, 0, 0))
+        self.image = pygame.image.load("trump.png")
         self.rect = self.image.get_rect()
 
         # makes the ball a circle
-        pygame.draw.circle(self.image, self.color, (radius, radius), radius, 0)
+        # pygame.draw.circle(self.image, self.color, (radius, radius), radius, 0)
         pygame.display.update()
 
     def move(self):

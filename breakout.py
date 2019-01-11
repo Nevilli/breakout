@@ -12,7 +12,7 @@ def main():
     APPLICATION_HEIGHT = 600
     PADDLE_Y_OFFSET = 30
     BRICKS_PER_ROW = 10
-    BRICK_SEP = 4  # The space between each brick
+    BRICK_SEP = 5  # The space between each brick
     BRICK_Y_OFFSET = 70
     BRICK_WIDTH = (APPLICATION_WIDTH - (BRICKS_PER_ROW -1) * BRICK_SEP) / BRICKS_PER_ROW
     BRICK_HEIGHT = 8
@@ -39,13 +39,11 @@ def main():
     mainSurface = pygame.display.set_mode((APPLICATION_WIDTH, APPLICATION_HEIGHT), 0, 32)
     pygame.display.set_caption("Trumpy")
 
-
-    background_image = pygame.image.load("Background.pn")
+    background_image = pygame.image.load("oval.png")
     background_rect = background_image.get_rect()
     background_rect.x = 0
     background_rect.y = 0
     mainSurface.blit(background_image, background_rect)
-
 
     x = 0
     y = BRICK_Y_OFFSET
@@ -88,7 +86,8 @@ def main():
             if event == QUIT:
                 pygame.quit()
                 sys.exit()
-        mainSurface.fill(BLACK)
+        # mainSurface.fill(BLACK)
+        mainSurface.blit(background_image, background_rect)
         mainSurface.blit(balls.image, balls.rect)
         for bricks in brick_group:
             mainSurface.blit(bricks.image, bricks.rect)
