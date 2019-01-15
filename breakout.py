@@ -81,6 +81,8 @@ def main():
         # This spaces out the rows of bricks
         y = y + BRICK_HEIGHT + BRICK_SEP
 
+        bottom_sound = pygame.mixer.Sound("fired.wav")
+
     while True:
         for event in pygame.event.get():
             if event == QUIT:
