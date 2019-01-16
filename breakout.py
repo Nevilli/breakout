@@ -9,7 +9,7 @@ def main():
     # Constants that will be used in the program
 
     APPLICATION_WIDTH = 400
-    APPLICATION_HEIGHT = 600
+    APPLICATION_HEIGHT = 595
     PADDLE_Y_OFFSET = 30
     BRICKS_PER_ROW = 10
     BRICK_SEP = 5  # The space between each brick
@@ -34,8 +34,13 @@ def main():
     colors = [RED, RED, ORANGE, ORANGE, YELLOW, YELLOW, GREEN, GREEN, CYAN, CYAN]
     whites = [WHITE]
 
-    # Breakout window
+    pygame.mixer.pre_init(32000, -16, 1, 512)
+    pygame.mixer.init()
     pygame.init()
+    bottom_sound = pygame.mixer.Sound("fired.wav")
+    money_sound = pygame.mixer.Sound("money.wav")
+
+    # Breakout window
     mainSurface = pygame.display.set_mode((APPLICATION_WIDTH, APPLICATION_HEIGHT), 0, 32)
     pygame.display.set_caption("Trumpy")
 
@@ -81,8 +86,6 @@ def main():
         # This spaces out the rows of bricks
         y = y + BRICK_HEIGHT + BRICK_SEP
 
-        bottom_sound = pygame.mixer.Sound("fired.wav")
-
     while True:
         for event in pygame.event.get():
             if event == QUIT:
@@ -102,6 +105,9 @@ def main():
         balls.collide(paddle_group, brick_group)
         # These if statements set the number of turns for the game and will end it if the limit is reached
         if balls.rect.bottom >= APPLICATION_HEIGHT:
+            bottom_sound.play()
+            while pygame.mixer.get_busy():
+                pygame.time.delay(1)
             balls.rect.x = 205
             balls.rect.y = 300
             NUM_TURNS -= 1
@@ -114,3 +120,5 @@ def main():
 
 
 main()
+
+# need to figure out money sound for ball hitting bricks!

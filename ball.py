@@ -34,9 +34,6 @@ class Ball(pygame.sprite.Sprite):
 
         if self.rect.top < 0:
             self.speedy = -self.speedy
-        elif self.rect.bottom > self.windowHeight:
-            self.rect.x = 200
-            self.rect.y = 200
         elif self.rect.left < 0 or self.rect.right > self.windowWidth:
             self.speedx = -self.speedx
 
