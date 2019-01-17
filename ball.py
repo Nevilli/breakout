@@ -6,6 +6,12 @@ class Ball(pygame.sprite.Sprite):
     def __init__(self, color, windowWidth, windowHeight, radius):
         super().__init__()
 
+        pygame.mixer.pre_init(11000, -16, 1, 512)
+        pygame.mixer.init()
+        pygame.init()
+        self.money_sound = pygame.mixer.Sound("money.wav")
+        self.paddle_sound = pygame.mixer.Sound("twang.wav")
+
         # class variables
         self.color = color
         self.radius = radius
@@ -46,6 +52,8 @@ class Ball(pygame.sprite.Sprite):
         """
         if pygame.sprite.spritecollide(self, brick_group, True):
             self.speedy = -self.speedy
+            self.money_sound.play()
         if pygame.sprite.spritecollide(self, paddle_group, False):
             self.speedy = -self.speedy
+            self.paddle_sound.play()
 

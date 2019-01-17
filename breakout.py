@@ -38,7 +38,6 @@ def main():
     pygame.mixer.init()
     pygame.init()
     bottom_sound = pygame.mixer.Sound("fired.wav")
-    money_sound = pygame.mixer.Sound("money.wav")
 
     # Breakout window
     mainSurface = pygame.display.set_mode((APPLICATION_WIDTH, APPLICATION_HEIGHT), 0, 32)
@@ -120,5 +119,3 @@ def main():
 
 
 main()
-
-# need to figure out money sound for ball hitting bricks!
